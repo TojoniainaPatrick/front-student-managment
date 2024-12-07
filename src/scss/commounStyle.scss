@@ -1,0 +1,21 @@
+.add-link{
+    text-decoration: none;
+    display: inline-flex;
+    margin-left: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: white;
+    background-color: #3DAD5B;
+    height: 40px;
+    padding: 0 15px;
+}
+
+@media print{
+    .header.header-sticky, .none, .footer{
+        display: none;
+    }
+    .print{
+        display: flex;
+    }
+}
