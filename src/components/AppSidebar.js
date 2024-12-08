@@ -63,8 +63,7 @@ const AppSidebar = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 'bolder',
-                color: 'darkblue',
-                fontWeight: 'bolder'
+                color: 'darkblue'
               }}>
               <h4> Spray </h4>
               <h4> Infos </h4>
