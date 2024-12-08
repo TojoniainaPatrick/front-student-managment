@@ -71,6 +71,8 @@ export const ContextProvider = ({ children }) => {
         .catch( error => console.log( error ))
     }
 
+    const [ currentLevel, setCurrentLevel ] = useState({})
+
     return(
         <Context.Provider
             value = {{
@@ -116,7 +118,11 @@ export const ContextProvider = ({ children }) => {
                 setCurrentAcademicYear,
                 getLastYear,
                 lastYear, 
-                setLastYear
+                setLastYear,
+
+                // level
+                currentLevel,
+                setCurrentLevel
             }}
         >
             { children }

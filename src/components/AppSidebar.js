@@ -14,9 +14,8 @@ import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
-import { logo } from 'src/assets/brand/logo'
 import { sygnet } from 'src/assets/brand/sygnet'
-import logo_dgi from '../assets/brand/logo.png'
+import logo from '../assets/brand/logo.jpg'
 
 // sidebar nav config
 import navigation from '../_nav'
@@ -31,7 +30,7 @@ const AppSidebar = () => {
 
   return (
     <CSidebar
-      className="border-end"
+      className="border-end none"
       colorScheme="dark"
       position="fixed"
       unfoldable={unfoldable}
@@ -41,7 +40,7 @@ const AppSidebar = () => {
       }}
     >
 
-      <CSidebarHeader className="border-bottom">
+      <CSidebarHeader className="border-bottom bg-white">
 
         <CSidebarBrand style={{
           display: 'flex',
@@ -50,23 +49,25 @@ const AppSidebar = () => {
           alignItems: 'center',
           justifyContent: 'center',
           textDecoration: 'none',
-          gap: 15
+          gap: 35
           }}
         >
 
-          <CImage src = { logo_dgi } width = { 60 }/>
+          <CImage src = { logo } width = { 60 }/>
 
           {
             !unfoldable &&
             <div style = {{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 'bolder'
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bolder',
+                color: 'darkblue',
+                fontWeight: 'bolder'
               }}>
-              <span> Solution RPA </span>
-              <span> Télépaiement </span>
+              <h4> Spray </h4>
+              <h4> Infos </h4>
             </div>
           }
 

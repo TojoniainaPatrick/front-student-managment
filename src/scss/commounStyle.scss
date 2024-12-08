@@ -11,9 +11,26 @@
     padding: 0 15px;
 }
 
+.schedule-table{
+    width: 100%;
+    td, th{
+        height: 50px;
+        width: 150px;
+        border: .5px solid lightgrey;
+        text-align: center;
+    }
+    .hour{
+        width: 250px;
+    }
+}
+
 @media print{
     .header.header-sticky, .none, .footer{
         display: none;
+    }
+    .hour{
+        width: 250px;
+        background-color: red;
     }
     .print{
         display: flex;

@@ -5,7 +5,8 @@ export const academicYearInitialState = {
 
 export const levelInitialState = {
     levelDesignation: "",
-    academicYearId: null
+    academicYearId: null,
+    monthlySchoolFees: ""
 }
 
 export const paymentInstallmentInitalState = {

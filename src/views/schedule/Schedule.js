@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import axios from "../../api/axios";
 import NewScheduleItem from "./NewScheduleItem";
 import { useNavigate } from "react-router-dom";
+import { day, timeTable } from "../../constant/periode";
 
 export default function Subject(){
 
@@ -121,6 +122,8 @@ export default function Subject(){
                                         levelDesignation: item.Subject?.Level?.levelDesignation,
                                         professorName: item.Subject?.Professor?.professorName,
                                         subjectName: item.Subject?.subjectName,
+                                        scheduleItemHour: timeTable[ item.scheduleItemHour ],
+                                        scheduleItemDay: day[ item.scheduleItemDay ],
                                         action:
                                         <Space>
 

@@ -1,30 +1,16 @@
 import React from 'react'
 import {
   CAvatar,
-  CBadge,
   CDropdown,
-  CDropdownDivider,
   CDropdownHeader,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
 } from '@coreui/react'
-import {
-  cilBell,
-  cilCreditCard,
-  cilCommentSquare,
-  cilEnvelopeOpen,
-  cilFile,
-  cilLockLocked,
-  cilSettings,
-  cilTask,
-  cilUser,
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/default_user.jpg'
 import { useNavigate } from 'react-router-dom'
-import { CiLogout } from 'react-icons/ci'
+import { MdLogout, MdPerson } from 'react-icons/md'
 
 const AppHeaderDropdown = () => {
 
@@ -33,6 +19,10 @@ const AppHeaderDropdown = () => {
   const handleLogOut = () => {
     navigate('/')
     localStorage.removeItem('user')
+  }
+
+  const goToProfil = () => {
+    navigate('/app/profile')
   }
 
   return (
@@ -46,8 +36,14 @@ const AppHeaderDropdown = () => {
 
         <CDropdownHeader className="bg-body-secondary fw-semibold mb-2">Compte</CDropdownHeader>
 
+        <CDropdownItem onClick = { goToProfil }>
+          <MdPerson />
+          <span style={{ cursor: 'pointer', marginLeft: 5 }}> Profil </span>
+        </CDropdownItem>
+
         <CDropdownItem onClick = { handleLogOut }>
-          <span style={{ cursor: 'pointer'}}> Se déconnecter </span>
+          <MdLogout />
+          <span style={{ cursor: 'pointer', marginLeft: 5 }}> Se déconnecter </span>
         </CDropdownItem>
         
       </CDropdownMenu>

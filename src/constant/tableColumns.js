@@ -341,3 +341,41 @@ export const scheduleTableColumns = [
     width: 80
   }
 ]
+
+export const scheduleInsightTableColumns = [
+  {
+    title: 'Heure',
+    dataIndex: 'hour',
+    width: 80,
+  },
+  {
+    title: 'Lundi',
+    dataIndex: 'scheduleItemHour',
+    width: 80,
+  },
+  {
+    title: 'Mardi',
+    dataIndex: 'subjectName',
+    width: 150,
+  },
+  {
+    title: 'Mercredi',
+    dataIndex: 'professorName',
+    width: 120,
+  },
+  {
+    title: 'Jeudi',
+    dataIndex: 'levelDesignation',
+    width: 50,
+  },
+  {
+    title: 'Vendredi',
+    dataIndex: 'action',
+    width: 80
+  },
+  {
+    title: 'Samedi',
+    dataIndex: 'action',
+    width: 80
+  }
+]

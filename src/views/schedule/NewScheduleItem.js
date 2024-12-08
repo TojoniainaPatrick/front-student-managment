@@ -13,6 +13,7 @@ export default function NewScheduleItem(){
     const {
         getSubjects,
         getSchedules,
+        schedules,
         subjects
     } = useCustomContext()
 
@@ -89,6 +90,20 @@ export default function NewScheduleItem(){
         }
     }
 
+    const freeSubjects = ( schedule.scheduleItemDay && schedule.scheduleItemHour )
+    ? subjects.filter( subject => {
+        const schedulesMatchingDayAndHour = schedules?.filter( scheduleItem =>
+            scheduleItem.scheduleItemDay == schedule.scheduleItemDay &&
+            scheduleItem.scheduleItemHour == schedule.scheduleItemHour
+        )
+
+        return schedulesMatchingDayAndHour.every( scheduleItem =>
+            scheduleItem.Subject?.professorId != subject.professorId &&
+            scheduleItem.Subject?.levelId != subject.levelId
+        )
+    })
+    : []
+
     return(
         <>
             <CButton color="success text-white" onClick = { openModal }> <i> <CiSquarePlus /> </i> Ajouter </CButton>
@@ -143,7 +158,7 @@ export default function NewScheduleItem(){
                     options = {
                         [{ label: "Choisissez une matière", value: ''}]
                         .concat(
-                            subjects.map( subject => ({
+                            freeSubjects.map( subject => ({
                                 label: subject.subjectName ,
                                 value: subject.subjectId
                             }))
