@@ -15,7 +15,8 @@ export default function Subject(){
 
     const {
         schedules,
-        getSchedules
+        getSchedules,
+        user
     } = useCustomContext()
 
     const [ search, setSearch ] = useState('')
@@ -98,7 +99,7 @@ export default function Subject(){
                                 size = "large"
                                 style = {{ width: 300, marginRight: 10 }}
                             />
-                            <NewScheduleItem />
+                            { user?.type == "admin" && <NewScheduleItem /> }
 
                             <CButton
                                 color = "primary"
@@ -126,15 +127,17 @@ export default function Subject(){
                                         scheduleItemDay: day[ item.scheduleItemDay ],
                                         action:
                                         <Space>
-
-                                            <CButton
-                                                color="danger"
-                                                className="text-white"
-                                                onClick = { () => deleteSchedule( item.subjectId ) }
-                                            >
-                                                <AiOutlineDelete />
-                                            </CButton>
-
+                                            {
+                                                user?.type == "admin"
+                                                && 
+                                                <CButton
+                                                    color="danger"
+                                                    className="text-white"
+                                                    onClick = { () => deleteSchedule( item.subjectId ) }
+                                                >
+                                                    <AiOutlineDelete />
+                                                </CButton>
+                                            }
                                         </Space>
                                     }))
                                 }

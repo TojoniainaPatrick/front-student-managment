@@ -15,7 +15,8 @@ export default function SchoolFees(){
     const {
         schoolFees,
         getSchoolFees,
-        setCurrentSchoolFees
+        setCurrentSchoolFees,
+        user
     } = useCustomContext()
 
     const [ search, setSearch ] = useState('')
@@ -65,7 +66,6 @@ export default function SchoolFees(){
                                 size="large"
                                 style={{ width: 300, marginRight: 10 }}
                             />
-                            {/* <NewStudent /> */}
                         </CCol>
                     </CRow>
 
@@ -87,20 +87,22 @@ export default function SchoolFees(){
                                         action: <Space>
 
                                             {
-                                                item.schoolFeesStatus == 'Payé'
-                                                ? <CButton
-                                                    color="danger"
-                                                    className="text-white"
-                                                    onClick = { () => handlePrint( item.schoolFeesId ) }
-                                                >
-                                                    <AiOutlineFilePdf size = { 22 } />
-                                                </CButton>
-                                                : <CButton
+                                                item.schoolFeesStatus != 'Payé' && user?.type =="admin"
+                                                ? 
+                                                <CButton
                                                     color="success"
                                                     className="text-white"
                                                     onClick = { () => handlePay( item ) }
                                                 >
                                                     <MdPayment size = { 22 } />
+                                                </CButton> 
+                                                :
+                                                item.schoolFeesStatus == 'Payé' && <CButton
+                                                    color="danger"
+                                                    className="text-white"
+                                                    onClick = { () => handlePrint( item.schoolFeesId ) }
+                                                >
+                                                    <AiOutlineFilePdf size = { 22 } />
                                                 </CButton>
                                             }
 

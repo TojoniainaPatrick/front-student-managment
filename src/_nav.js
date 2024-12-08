@@ -5,11 +5,15 @@ import {
   cilSpeedometer,
   cilBank,
   cilWarning,
-  cilMoney
+  cilMoney,
+  cilCalendar,
+  cilCreditCard,
+  cilAvTimer,
+  cilWatch
 } from '@coreui/icons'
 import { CNavItem } from '@coreui/react'
 import { MdOutlineHomeWork } from "react-icons/md"
-import { FaUsersBetweenLines } from "react-icons/fa6";
+import { FaUsersBetweenLines, FaUserTie } from "react-icons/fa6";
 
 const _nav = userType => {
 
@@ -25,37 +29,37 @@ const _nav = userType => {
         component: CNavItem,
         name: 'Année universitaire',
         to: '/app/academic-year',
-        icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
+        icon: <CIcon icon={cilCalendar} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'Enseignant',
         to: '/app/professor',
-        icon: <MdOutlineHomeWork className="nav-icon" />,
+        icon: <FaUserTie className="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'Matière',
         to: '/app/subject',
-        icon: <FaUsersBetweenLines className="nav-icon" />,
+        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'Etudiant',
         to: '/app/student',
-        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+        icon: <FaUsersBetweenLines className="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'Ecolage',
         to: '/app/school-fees',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+        icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />
       },
       {
         component: CNavItem,
         name: 'Emploi du temps',
         to: '/app/schedule',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+        icon: <CIcon icon={cilWatch} customClassName="nav-icon" />
       }
     ]
   : 
@@ -70,13 +74,13 @@ const _nav = userType => {
         component: CNavItem,
         name: 'Ecolage',
         to: '/app/school-fees',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+        icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />
       },
       {
         component: CNavItem,
         name: 'Emploi du temps',
         to: '/app/schedule',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+        icon: <CIcon icon={cilWatch} customClassName="nav-icon" />
       }
     ]
 
