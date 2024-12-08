@@ -78,7 +78,7 @@ export default function EditSubject({ open, setOpen }){
         <>
             <Modal
                 open = { open }
-                title = 'Nouvelle matière'
+                title = 'Modification de matière'
                 okText = 'Modifier'
                 cancelText = 'Annuler'
                 onCancel = { closeModal }

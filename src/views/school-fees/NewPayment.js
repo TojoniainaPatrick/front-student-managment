@@ -84,7 +84,7 @@ export default function NewPayment({ open, setOpen }){
 
             <Modal
                 open = { open }
-                title = 'Nouvel étudiant'
+                title = 'Nouvelle tranche de paiement'
                 okText = 'Ajouter'
                 cancelText = 'Annuler'
                 onCancel = { closeModal }

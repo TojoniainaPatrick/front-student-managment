@@ -92,7 +92,7 @@ export default function NewProfessor(){
 
             <Modal
                 open = { open }
-                title = 'Nouvel étudiant'
+                title = 'Nouvel enseignant'
                 okText = 'Ajouter'
                 cancelText = 'Annuler'
                 onCancel = { closeModal }
