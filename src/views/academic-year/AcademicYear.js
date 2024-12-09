@@ -89,72 +89,6 @@ export default function ScheduleInsight(){
 
             <EditLevel open = { openEdit } setOpen = { setOpenEdit } />
 
-            <CCol xs = { 12 } md = { 8 } >
-
-                <CCard className = "mb-4">
-
-                    <CCardHeader className="text-center">
-                        <h6> Mois </h6>
-                    </CCardHeader>
-
-                    <CCardBody>
-                        <CRow>
-                            {
-                                (
-                                    Array.isArray( selectedYear?.Months ) ?
-                                    selectedYear?.Months :
-                                    Array.isArray( lastYear.Months ) ? lastYear.Months : []
-                                )
-                                .map(( month, index ) =>
-                                    <CCol key = { index } xs = { 3 } >
-                                        <CCard className="mb-2" style={{ cursor: 'pointer'}}>
-                                            <CCardBody> { month.monthName } </CCardBody>
-                                        </CCard>
-                                    </CCol>
-                                )
-                            }
-                        </CRow>
-                    </CCardBody>
-
-                </CCard>
-
-                <CCard className = "mb-4">
-
-                    <CCardHeader className="d-flex align-items-center justify-content-between">
-                        <h6> Niveau </h6>
-                        <NewLevel />
-                    </CCardHeader>
-
-                    <CCardBody>
-                        <CRow>
-                            {
-                                (
-                                    Array.isArray( selectedYear?.Levels ) ?
-                                    selectedYear?.Levels :
-                                    Array.isArray( lastYear.Levels ) ? lastYear.Levels : []
-                                )
-                                .map(( level, index ) =>
-                                    <CCol key = { index } xs = { 4 } >
-                                        <CCard className="mb-2">
-                                            <CCardHeader className="text-end">
-                                                <CButton onClick = { () => editLevel( level ) }  color="secondary" className="text-white"> <MdEditSquare /> </CButton>
-                                                <CButton onClick = { () => deleteLevel( level.levelId ) } color="danger" className="text-white ms-2"> <MdDeleteOutline /> </CButton>
-                                            </CCardHeader>
-                                            <CCardBody>
-                                                <p> <strong className="text-primary"> Designation : </strong> { level.levelDesignation } </p>
-                                                <p> <strong className="text-primary"> Ecolage : </strong> { level.monthlySchoolFees } &nbsp; Ar </p>
-                                            </CCardBody>
-                                        </CCard>
-                                    </CCol>
-                                )
-                            }
-                        </CRow>
-                    </CCardBody>
-
-                </CCard>
-
-            </CCol>
-
             <CCol xs = { 12 } md = { 4 } >
 
                 <CCard className = "mb-4">
@@ -184,6 +118,72 @@ export default function ScheduleInsight(){
                                 </CCard>
                             )
                         }
+                    </CCardBody>
+
+                </CCard>
+
+            </CCol>
+
+            <CCol xs = { 12 } md = { 8 } >
+
+                <CCard className = "mb-4">
+
+                    <CCardHeader className="d-flex align-items-center justify-content-between">
+                        <h6> Niveau </h6>
+                        <NewLevel />
+                    </CCardHeader>
+
+                    <CCardBody>
+                        <CRow>
+                            {
+                                (
+                                    Array.isArray( selectedYear?.Levels ) ?
+                                    selectedYear?.Levels :
+                                    Array.isArray( lastYear.Levels ) ? lastYear.Levels : []
+                                )
+                                .map(( level, index ) =>
+                                    <CCol key = { index } xs = { 12 } md = { 4 }>
+                                        <CCard className="mb-2">
+                                            <CCardHeader className="text-end">
+                                                <CButton onClick = { () => editLevel( level ) }  color="secondary" className="text-white"> <MdEditSquare /> </CButton>
+                                                <CButton onClick = { () => deleteLevel( level.levelId ) } color="danger" className="text-white ms-2"> <MdDeleteOutline /> </CButton>
+                                            </CCardHeader>
+                                            <CCardBody>
+                                                <p> <strong className="text-primary"> Designation : </strong> { level.levelDesignation } </p>
+                                                <p> <strong className="text-primary"> Ecolage : </strong> { level.monthlySchoolFees } &nbsp; Ar </p>
+                                            </CCardBody>
+                                        </CCard>
+                                    </CCol>
+                                )
+                            }
+                        </CRow>
+                    </CCardBody>
+
+                </CCard>
+
+                <CCard className = "mb-4">
+
+                    <CCardHeader className="text-center">
+                        <h6> Mois </h6>
+                    </CCardHeader>
+
+                    <CCardBody>
+                        <CRow>
+                            {
+                                (
+                                    Array.isArray( selectedYear?.Months ) ?
+                                    selectedYear?.Months :
+                                    Array.isArray( lastYear.Months ) ? lastYear.Months : []
+                                )
+                                .map(( month, index ) =>
+                                    <CCol key = { index }  xs = { 12 } md = { 3 }>
+                                        <CCard className="mb-2" style={{ cursor: 'pointer'}}>
+                                            <CCardBody> { month.monthName } </CCardBody>
+                                        </CCard>
+                                    </CCol>
+                                )
+                            }
+                        </CRow>
                     </CCardBody>
 
                 </CCard>

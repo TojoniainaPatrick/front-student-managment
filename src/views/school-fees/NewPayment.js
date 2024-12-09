@@ -119,7 +119,7 @@ export default function NewPayment({ open, setOpen }){
                     type="text"
                     id="schoolFeesRemainder"
                     floatingClassName="mb-3"
-                    floatingLabel="Montant"
+                    floatingLabel="Reste"
                     onChange = { handleInputChange }
                     value = { currentSchoolFees.schoolFeesRemainder }
                 />

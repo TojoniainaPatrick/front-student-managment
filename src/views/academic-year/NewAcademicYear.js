@@ -11,6 +11,7 @@ export default function NewAcademicYear(){
 
     const {
         getAcademicYears,
+        getLastYear
     } = useCustomContext()
 
 
@@ -52,6 +53,7 @@ export default function NewAcademicYear(){
                     timer: 2000
                 });
                 getAcademicYears()
+                getLastYear()
                 closeModal()
             })
             .catch( error => {
