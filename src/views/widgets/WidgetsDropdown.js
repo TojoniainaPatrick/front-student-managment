@@ -1,24 +1,30 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import dayjs from 'dayjs'
 
 import {
   CRow,
   CCol,
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle,
-  CWidgetStatsA,
   CCard,
   CCardHeader,
   CCardBody,
 } from '@coreui/react'
 import { getStyle } from '@coreui/utils'
-import { CChartBar, CChartLine } from '@coreui/react-chartjs'
-import CIcon from '@coreui/icons-react'
-import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
+import useCustomContext from '../../hooks/useCustomContext'
 
 const WidgetsDropdown = (props) => {
+
+  const { totalsByLevel } = props
+
+  const {
+    getSchoolFees,
+    schoolFees
+  } = useCustomContext()
+
+  useEffect( () => {
+    getSchoolFees()
+  }, [])
+
   const widgetChartRef1 = useRef(null)
   const widgetChartRef2 = useRef(null)
 
@@ -43,20 +49,20 @@ const WidgetsDropdown = (props) => {
   return (
     <CRow className={props.className} xs={{ gutter: 4 }}>
 
-    <CCol sm={6} xl={5} xxl={4}>
+      <CCol sm={6} xl={5} xxl={4}>
 
-      <CCard color='danger' className='text-white'>
+        <CCard color='danger' className='text-white'>
 
-        <CCardHeader> <h6> LICENCE 1 </h6> </CCardHeader>
+          <CCardHeader> <h6> LICENCE 1 </h6> </CCardHeader>
 
-        <CCardBody>
-          <p> <strong> Payé : </strong> 20 </p>
-          <p> <strong> Impayé : </strong> 3 </p>
-        </CCardBody>
+          <CCardBody>
+            <p> <strong> Payé : </strong> { totalsByLevel?.L1?.paid || 0 } </p>
+            <p> <strong> Impayé : </strong> { totalsByLevel?.L1?.unpaid || 0 } </p>
+          </CCardBody>
 
-      </CCard>
-      
-    </CCol>
+        </CCard>
+        
+      </CCol>
 
       <CCol sm={6} xl={5} xxl={4}>
 
@@ -65,8 +71,8 @@ const WidgetsDropdown = (props) => {
           <CCardHeader> <h6> LICENCE 2 </h6> </CCardHeader>
 
           <CCardBody>
-            <p> <strong> Payé : </strong> 22 </p>
-            <p> <strong> Impayé : </strong> 5 </p>
+            <p> <strong> Payé : </strong> { totalsByLevel?.L2?.paid || 0 } </p>
+            <p> <strong> Impayé : </strong> { totalsByLevel?.L2?.unpaid || 0 } </p>
           </CCardBody>
 
         </CCard>
@@ -80,13 +86,49 @@ const WidgetsDropdown = (props) => {
           <CCardHeader> <h6> LICENCE 3 </h6> </CCardHeader>
 
           <CCardBody>
-            <p> <strong> Payé : </strong> 30 </p>
-            <p> <strong> Impayé : </strong> 2 </p>
+            <p> <strong> Payé : </strong> { totalsByLevel?.L3?.paid || 0 } </p>
+            <p> <strong> Impayé : </strong> { totalsByLevel?.L3?.unpaid || 0 } </p>
           </CCardBody>
 
         </CCard>
 
       </CCol>
+
+      {
+        totalsByLevel?.M1 &&
+        <CCol sm={6} xl={5} xxl={4}>
+
+          <CCard color='primary' className='text-white'>
+
+            <CCardHeader> <h6> MASTER 1 </h6> </CCardHeader>
+
+            <CCardBody>
+              <p> <strong> Payé : </strong> { totalsByLevel?.M1?.paid || 0 } </p>
+              <p> <strong> Impayé : </strong> { totalsByLevel?.M1?.unpaid || 0 } </p>
+            </CCardBody>
+
+          </CCard>
+
+        </CCol>
+      }
+
+      {
+        totalsByLevel?.M2 &&
+        <CCol sm={6} xl={5} xxl={4}>
+
+          <CCard color='success' className='text-white'>
+
+            <CCardHeader> <h6> MASTER 2 </h6> </CCardHeader>
+
+            <CCardBody>
+              <p> <strong> Payé : </strong> { totalsByLevel?.M2?.paid || 0 } </p>
+              <p> <strong> Impayé : </strong> { totalsByLevel?.M2?.unpaid || 0 } </p>
+            </CCardBody>
+
+          </CCard>
+
+        </CCol>
+      }
 
     </CRow>
   )

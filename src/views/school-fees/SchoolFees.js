@@ -28,7 +28,11 @@ export default function SchoolFees(){
 
     const onSearch = (value, _e, info) => set(info?.source, value)
 
-    const searchedData = schoolFees.filter( schoolFeesItem =>
+    const filteredData = user?.type === "student"
+    ? schoolFees.filter( schoolFeesItem => schoolFeesItem.studentId == user?.studentId )
+    : schoolFees
+
+    const searchedData = filteredData.filter( schoolFeesItem =>
         schoolFeesItem.Student?.studentName?.toString().toLowerCase().includes( search.toString().toLowerCase()) ||
         schoolFeesItem.Student?.Level?.levelDesignation?.toString().toLowerCase().includes( search.toString().toLowerCase()) ||
         schoolFeesItem.schoolFeesAmount?.toString().toLowerCase().includes( search.toString().toLowerCase()) || 

@@ -53,6 +53,7 @@ export const contribuableTableColumns = [
     width: 40,
   }
 ]
+
 export const declarationTableColumns = [
   {
     title: 'Référence',

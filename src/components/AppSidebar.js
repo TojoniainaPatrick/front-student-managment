@@ -10,11 +10,9 @@ import {
   CSidebarHeader,
   CSidebarToggler,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
-import { sygnet } from 'src/assets/brand/sygnet'
 import logo from '../assets/brand/logo.jpg'
 
 // sidebar nav config
@@ -66,7 +64,7 @@ const AppSidebar = () => {
                 color: 'darkblue'
               }}>
               <h4> Spray </h4>
-              <h4> Infos </h4>
+              <h4> Info </h4>
             </div>
           }
 

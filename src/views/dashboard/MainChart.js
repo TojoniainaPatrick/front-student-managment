@@ -3,7 +3,8 @@ import React, { useEffect, useRef } from 'react'
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
 
-const MainChart = () => {
+const MainChart = ({ paymentsByMonth }) => {
+
   const chartRef = useRef(null)
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const MainChart = () => {
         })
       }
     })
-  }, [chartRef])
+  }, [ chartRef ])
 
   const random = () => Math.round(Math.random() * 100)
 
@@ -34,7 +35,7 @@ const MainChart = () => {
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre'],
+          labels: ['Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août'],
           datasets: [
             {
               label: 'My First dataset',
@@ -43,16 +44,16 @@ const MainChart = () => {
               pointHoverBackgroundColor: getStyle('--cui-info'),
               borderWidth: 2,
               data: [
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
+                paymentsByMonth?.Novembre,
+                paymentsByMonth?.Décembre,
+                paymentsByMonth?.Janvier,
+                paymentsByMonth?.Février,
+                paymentsByMonth?.Mars,
+                paymentsByMonth?.Avril,
+                paymentsByMonth?.Mai,
+                paymentsByMonth?.Juin,
+                paymentsByMonth?.Juillet,
+                paymentsByMonth?.Août,
               ],
               fill: true,
             },
@@ -83,7 +84,7 @@ const MainChart = () => {
               grid: {
                 color: getStyle('--cui-border-color-translucent'),
               },
-              max: 250,
+              // max: 250,
               ticks: {
                 color: getStyle('--cui-body-color'),
                 maxTicksLimit: 5,

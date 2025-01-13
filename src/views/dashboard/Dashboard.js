@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   CCard,
@@ -8,12 +8,31 @@ import {
 } from '@coreui/react'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
+import useCustomContext from '../../hooks/useCustomContext'
+import { processData } from '../../function/processDashboardData'
 
 const Dashboard = () => {
 
+  const {
+    schoolFees,
+    getSchoolFees
+  } = useCustomContext()
+
+  const [ dashData, setDashData ] = useState({})
+
+  useEffect(() => {
+    getSchoolFees()
+  }, [])
+
+  useEffect(() => {
+    const tempDashData = processData( schoolFees )
+    setDashData( tempDashData )
+    console.log( dashData )
+  }, [ schoolFees ])
+
   return (
     <>
-      <WidgetsDropdown className="mb-4" />
+      <WidgetsDropdown className="mb-4" totalsByLevel = { dashData?.totalsByLevel } />
       <CCard className="mb-4">
         <CCardBody>
           <CRow>
@@ -23,7 +42,7 @@ const Dashboard = () => {
               </h4>
             </CCol>
           </CRow>
-          <MainChart />
+          <MainChart paymentsByMonth = { dashData?.paymentsByMonth} />
         </CCardBody>
       </CCard>
     </>
