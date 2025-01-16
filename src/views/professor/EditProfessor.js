@@ -1,7 +1,6 @@
 import { CFormInput } from "@coreui/react";
 import { Modal } from "antd";
 import useCustomContext from "../../hooks/useCustomContext";
-import { calculImpot } from "../../function/calculImpot";
 import Swal from "sweetalert2";
 import axios from "../../api/axios";
 import { professorInitialState } from "../../types/ObjectInitialState";

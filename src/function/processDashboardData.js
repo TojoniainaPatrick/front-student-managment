@@ -1,16 +1,3 @@
-const initialData = {
-    Novembre: 0,
-    Décembre: 0,
-    Janvier: 0,
-    Février: 0,
-    Mars: 0,
-    Avril: 0,
-    Mai: 0,
-    Juin: 0,
-    Juillet: 0,
-    Août: 0
-}
-
 // Exemple de manipulation des données pour l'année courante
 
 export const processData = (data) => {
@@ -52,7 +39,18 @@ export const processData = (data) => {
         acc[month] += totalPaid;
 
         return acc;
-    }, initialData );
+    },  {
+        Novembre: 0,
+        Décembre: 0,
+        Janvier: 0,
+        Février: 0,
+        Mars: 0,
+        Avril: 0,
+        Mai: 0,
+        Juin: 0,
+        Juillet: 0,
+        Août: 0
+    } );
 
     return { totalsByLevel, paymentsByMonth };
 };

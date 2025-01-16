@@ -27,7 +27,6 @@ const MainChart = ({ paymentsByMonth }) => {
     })
   }, [ chartRef ])
 
-  const random = () => Math.round(Math.random() * 100)
 
   return (
     <>
@@ -38,7 +37,7 @@ const MainChart = ({ paymentsByMonth }) => {
           labels: ['Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août'],
           datasets: [
             {
-              label: 'My First dataset',
+              label: "Paiement d'écolage",
               backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
               borderColor: getStyle('--cui-info'),
               pointHoverBackgroundColor: getStyle('--cui-info'),
@@ -87,8 +86,8 @@ const MainChart = ({ paymentsByMonth }) => {
               // max: 250,
               ticks: {
                 color: getStyle('--cui-body-color'),
-                maxTicksLimit: 5,
-                stepSize: Math.ceil(250 / 5),
+                // maxTicksLimit: 5,
+                // stepSize: Math.ceil(250 / 5),
               },
             },
           },
