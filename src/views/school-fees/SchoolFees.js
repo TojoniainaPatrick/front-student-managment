@@ -25,7 +25,8 @@ export default function SchoolFees(){
     useEffect(() => {
         getSchoolFees()
     }, [])
-
+    
+    console.log(schoolFees)
     const onSearch = (value, _e, info) => set(info?.source, value)
 
     const filteredData = user?.type === "student"
@@ -39,6 +40,8 @@ export default function SchoolFees(){
         schoolFeesItem.schoolFeesStatus?.toString().toLowerCase().includes( search.toString().toLowerCase()) || 
         schoolFeesItem.Month?.monthName?.toString().toLowerCase().includes( search.toString().toLowerCase()) 
     )
+    .sort(( a, b ) => a.monthId - b.monthId )
+    .sort(( a, b ) => a.studentId - b.studentId )
 
     const navigate = useNavigate()
     

@@ -1,16 +1,17 @@
-import { CButton, CFormInput } from "@coreui/react";
+import { CFormInput } from "@coreui/react";
 import { Modal, Select } from "antd";
-import { useEffect, useState } from "react";
-import { CiSquarePlus } from "react-icons/ci";
 import useCustomContext from "../../hooks/useCustomContext";
 import Swal from "sweetalert2";
 import axios from "../../api/axios";
 import { studentInitalState } from "../../types/ObjectInitialState";
+import { useEffect } from "react";
 
-export default function NewStudent(){
+export default function EditStudent({ open, setOpen }){
 
     const {
         getStudents,
+        currentStudent,
+        setCurrentStudent,
         getLastYear,
         lastYear
     } = useCustomContext()
@@ -19,70 +20,37 @@ export default function NewStudent(){
         getLastYear()
     }, [])
 
-    const [ open, setOpen ] = useState( false )
-    const [ student, setStudent ] = useState( studentInitalState )
-
-    const openModal = _=> setOpen(true)
-
     const closeModal = _=> {
         setOpen( false )
-        setStudent( studentInitalState )
+        setCurrentStudent( studentInitalState )
     }
 
     const confirm = async _=> {
-        if( !student.studentInscriptionNumber ){
+        if( !currentStudent.studentName ){
             Swal.fire({
                 position: "center",
                 icon: "warning",
-                title: "Veuillez saisir le numéro matricule!",
+                title: "Veuillez saisir le nom complet!",
                 timer: 5000
             });
         }
-        else if( !student.studentName ){
+        else if( !currentStudent.studentEmail ){
             Swal.fire({
                 position: "center",
                 icon: "warning",
-                title: "Veuillez saisir le nom de l'employé!",
-                timer: 5000
-            });
-        }
-        else if( !student.studentEmail ){
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Veuillez saisir l'adresse e-mail!",
-                timer: 5000
-            });
-        }
-        else if( !student.studentAddress ){
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Veuillez indiquer l'adresse!",
-                timer: 5000
-            });
-        }
-        else if( !student.studentPassword ){
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Veuillez saisir le mot de passe",
-                timer: 5000
-            });
-        }
-        else if( !student.levelId ){
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Veuillez choisir un niveau!",
+                title: "Veuillez saisir l'adresse e-mail'!",
                 timer: 5000
             });
         }
         else{
-            await axios.post('/student/add', {
-                ...student,
-                studentInscriptionNumber: `${student.studentInscriptionNumber}-SI`
-            } )
+            const updatedStudent = Object
+                .entries( currentStudent )
+                .reduce(( accumulateur, [ key, value ]) => {
+                if( ![ "adminPassword", "studentPassword" ].includes( key ) ) accumulateur[key] = value
+                return accumulateur
+                }, {})
+
+            await axios.put(`/student/edit/${currentStudent.studentId}`, { ... updatedStudent })
             .then( _ => {
                 Swal.fire({
                     position: "center",
@@ -96,20 +64,11 @@ export default function NewStudent(){
             })
             .catch( error => {
                 if( error?.response?.data?.message ){
-                    if( error?.response?.data?.message == "Validation error" ){
-                        Swal.fire({
-                            position: "center",
-                            icon: "error",
-                            title: "Le numéro matricule saisi est déjà utilisé. Merci de bien vouloir saisir un autre numéro!"
-                        });
-                    }
-                    else{
-                        Swal.fire({
-                            position: "center",
-                            icon: "error",
-                            title: error?.response?.data?.message,
-                        });
-                    }
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: error?.response?.data?.message,
+                    });
                 }
                 else{
                     Swal.fire({
@@ -124,17 +83,15 @@ export default function NewStudent(){
     }
 
     const handleInputChange = e => {
-        setStudent({ ...student, [ e.target.id ]: e.target.value })
+        setCurrentStudent({ ...currentStudent, [ e.target.id ]: e.target.value })
     }
 
     return(
         <>
-            <CButton color="success text-white" onClick = { openModal }> <i> <CiSquarePlus /> </i> Ajouter </CButton>
-
             <Modal
                 open = { open }
-                title = 'Nouvel étudiant'
-                okText = 'Ajouter'
+                title = "Modification d'étudiant"
+                okText = 'Modifier'
                 cancelText = 'Annuler'
                 onCancel = { closeModal }
                 onOk = { confirm }
@@ -143,7 +100,7 @@ export default function NewStudent(){
                 style={{ margin: '20px auto'}}
             >
                 {
-                    /^\d{4}$/.test( student.studentInscriptionNumber ) && 
+                    /^\d{4}$/.test( currentStudent.studentInscriptionNumber ) && 
                     <span style={{ position: 'absolute', zIndex: 100, top: 77, left: 75, fontSize: '1rem' }}> -SI </span>
                 }
                 <CFormInput
@@ -155,7 +112,8 @@ export default function NewStudent(){
                     onChange = { event => {
                         if(/^\d{0,4}$/.test(event.target.value)) handleInputChange( event )
                     }}
-                    value = { student.studentInscriptionNumber }
+                    readOnly
+                    value = { currentStudent.studentInscriptionNumber }
                 />
 
                 <CFormInput
@@ -165,7 +123,7 @@ export default function NewStudent(){
                     floatingLabel="Nom et prénom"
                     placeholder="Nom et prénom"
                     onChange = { handleInputChange }
-                    value = { student.studentName }
+                    value = { currentStudent.studentName }
                 />
 
                 <CFormInput
@@ -175,7 +133,7 @@ export default function NewStudent(){
                     floatingLabel="Adresse e-mail"
                     placeholder="Adresse e-mail"
                     onChange = { handleInputChange }
-                    value = { student.studentEmail }
+                    value = { currentStudent.studentEmail }
                 />
 
                 <CFormInput
@@ -185,17 +143,7 @@ export default function NewStudent(){
                     floatingLabel="Adresse du domicile"
                     placeholder="Adresse du domicile"
                     onChange = { handleInputChange }
-                    value = { student.studentAddress }
-                />
-
-                <CFormInput
-                    type="password"
-                    id="studentPassword"
-                    floatingClassName="mb-3"
-                    floatingLabel="Mot de passe"
-                    placeholder="Mot de passe"
-                    onChange = { handleInputChange }
-                    value = { student.studentPassword }
+                    value = { currentStudent.studentAddress }
                 />
 
                 <Select
@@ -210,8 +158,9 @@ export default function NewStudent(){
                             }))
                         )
                     }
-                    onChange = { value => setStudent({...student, levelId: value }) }
-                    value = { student.levelId }
+                    disabled
+                    onChange = { value => setCurrentStudent({...currentStudent, levelId: value })}
+                    value = { currentStudent.levelId }
                 />
 
             </Modal>

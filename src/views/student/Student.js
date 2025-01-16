@@ -1,6 +1,6 @@
 import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table, Input, Space } from 'antd'
-import { AiOutlineDelete } from "react-icons/ai"
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai"
 import NewStudent from "./NewStudent";
 import { studentTableColumns } from "../../constant/tableColumns";
 import useCustomContext from "../../hooks/useCustomContext";
@@ -8,15 +8,18 @@ import { useEffect, useState } from "react";
 const { Search } = Input
 import Swal from 'sweetalert2'
 import axios from "../../api/axios";
+import EditStudent from "./EditStudent";
 
 export default function Student(){
 
     const {
         students,
+        setCurrentStudent,
         getStudents
     } = useCustomContext()
 
     const [ search, setSearch ] = useState('')
+    const [ openUpdate, setOpenUpdate ] = useState( false )
 
     useEffect(() => {
         getStudents()
@@ -31,6 +34,11 @@ export default function Student(){
         student.studentAddress?.toString().toLowerCase().includes( search.toString().toLowerCase()) || 
         student.Level?.levelDesignation?.toString().toLowerCase().includes( search.toString().toLowerCase()) 
     )
+ 
+    const handleOpenUpdate = professor => {
+        setCurrentStudent( professor )
+        setOpenUpdate( true )
+    }
 
     const deleteStudent = async studentId => {
        
@@ -77,6 +85,7 @@ export default function Student(){
 
     return(
         <>
+            <EditStudent open = { openUpdate } setOpen = { setOpenUpdate } />
             <CRow >
                 <CCol xs = { 12 }>
 
@@ -108,6 +117,14 @@ export default function Student(){
                                         key: key,
                                         studentLevel: item.Level?.levelDesignation,
                                         action: <Space>
+                                            
+                                            <CButton 
+                                                color="primary"
+                                                className="text-white me-1"
+                                                onClick = { _ => handleOpenUpdate( item )}
+                                            >
+                                                <AiOutlineEdit />
+                                            </CButton>
 
                                             <CButton
                                                 color="danger"

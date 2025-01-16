@@ -148,6 +148,7 @@ export default function Profile(){
                                 placeholder="Nom et prénom"
                                 onChange = { handleChange }
                                 value = { user.studentName }
+                                readOnly
                             />
                         }
                         
