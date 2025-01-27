@@ -66,12 +66,6 @@ const _nav = userType => {
     [
       {
         component: CNavItem,
-        name: 'Dashboard',
-        to: '/app/dashboard',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
-      },
-      {
-        component: CNavItem,
         name: 'Ecolage',
         to: '/app/school-fees',
         icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />

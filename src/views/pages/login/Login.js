@@ -64,7 +64,8 @@ const Login = () => {
           localStorage.setItem('user', JSON.stringify(userDataWithouPassword))
           setUser( userDataWithouPassword )
   
-          navigate('/app/dashboard')
+          if( userFullData?.type?.toString().toLowerCase() === 'admin' ) navigate('/app/dashboard')
+          else navigate('/app/school-fees')
         }
       )
       .catch( error => {
